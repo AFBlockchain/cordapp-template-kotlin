@@ -1,6 +1,6 @@
-package com.template.states
+package hk.edu.polyu.af.bc.template.states
 
-import com.template.contracts.TemplateContract
+import hk.edu.polyu.af.bc.template.contracts.TemplateContract
 import net.corda.core.contracts.BelongsToContract
 import net.corda.core.contracts.ContractState
 import net.corda.core.identity.AbstractParty

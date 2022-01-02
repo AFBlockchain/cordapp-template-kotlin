@@ -1,14 +1,14 @@
-package com.template
+package hk.edu.polyu.af.bc.template
 
 import net.corda.testing.node.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import com.template.states.TemplateState
+import hk.edu.polyu.af.bc.template.states.TemplateState
 import java.util.concurrent.Future;
 import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.transactions.SignedTransaction
-import com.template.flows.Initiator
+import hk.edu.polyu.af.bc.template.flows.Initiator
 import net.corda.core.node.services.Vault.StateStatus
 
 

@@ -1,4 +1,4 @@
-package com.template
+package hk.edu.polyu.af.bc.template
 
 import net.corda.core.identity.CordaX500Name
 import net.corda.core.utilities.getOrThrow
