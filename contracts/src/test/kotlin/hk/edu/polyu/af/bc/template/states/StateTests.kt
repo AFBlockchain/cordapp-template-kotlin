@@ -1,6 +1,5 @@
-package hk.edu.polyu.af.bc.template.contracts
+package hk.edu.polyu.af.bc.template.states
 
-import hk.edu.polyu.af.bc.template.states.TemplateState
 import org.junit.Test
 import kotlin.test.assertEquals
 

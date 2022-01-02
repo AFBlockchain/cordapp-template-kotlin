@@ -8,12 +8,12 @@ import org.junit.Test
 import hk.edu.polyu.af.bc.template.states.TemplateState
 
 class ContractTests {
-    private val ledgerServices: MockServices = MockServices(listOf("com.template"))
+    private val ledgerServices: MockServices = MockServices(listOf("hk.edu.polyu.af.bc.template"))
     var alice = TestIdentity(CordaX500Name("Alice", "TestLand", "US"))
-    var bob = TestIdentity(CordaX500Name("Alice", "TestLand", "US"))
+    var bob = TestIdentity(CordaX500Name("Bob", "TestLand", "US"))
 
     @Test
-    fun dummytest() {
+    fun test() {
         val state = TemplateState("Hello-World", alice.party, bob.party)
         ledgerServices.ledger {
             // Should fail bid price is equal to previous highest bid

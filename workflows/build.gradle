@@ -6,7 +6,7 @@ cordapp {
     minimumPlatformVersion corda_platform_version
     workflow {
         name "Template Flows"
-        vendor "Corda Open Source"
+        vendor "AFBlockchain"
         licence "Apache License, Version 2.0"
         versionId 1
     }

@@ -6,9 +6,6 @@ import net.corda.core.contracts.ContractState
 import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 
-// *********
-// * State *
-// *********
 @BelongsToContract(TemplateContract::class)
 data class TemplateState(val msg: String,
                          val sender: Party,

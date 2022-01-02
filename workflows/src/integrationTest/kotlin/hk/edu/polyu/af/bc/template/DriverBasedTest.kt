@@ -16,7 +16,7 @@ class DriverBasedTest {
     private val bankB = TestIdentity(CordaX500Name("BankB", "", "US"))
 
     @Test
-    fun `node test`() = withDriver {
+    fun test() = withDriver {
         // Start a pair of nodes and wait for them both to be ready.
         val (partyAHandle, partyBHandle) = startNodes(bankA, bankB)
 
