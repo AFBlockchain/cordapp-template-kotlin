@@ -9,7 +9,7 @@ git clone https://github.com/AFBlockchain/cordapp-template-kotlin
 2. Rename the project
 
 ```shell
-mv cordapp-template-kotlin $PRJECT_NAME
+mv cordapp-template-kotlin $PROJECT_NAME
 cd $PROJECT_NAME
 ```
 
