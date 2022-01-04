@@ -60,6 +60,10 @@ allprojects {
         preserveFileTimestamps = false
         reproducibleFileOrder = true
     }
+
+    test {
+        testLogging.showStandardStreams = true
+    }
 }
 
 apply plugin: 'net.corda.plugins.cordapp'
