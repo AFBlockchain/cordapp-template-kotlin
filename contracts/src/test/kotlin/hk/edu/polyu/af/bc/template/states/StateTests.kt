@@ -1,6 +1,6 @@
 package hk.edu.polyu.af.bc.template.states
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class StateTests {

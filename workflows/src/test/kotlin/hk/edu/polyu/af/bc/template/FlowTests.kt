@@ -1,23 +1,24 @@
 package hk.edu.polyu.af.bc.template
 
 import net.corda.testing.node.*
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
 import hk.edu.polyu.af.bc.template.states.TemplateState
 import java.util.concurrent.Future;
 import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.transactions.SignedTransaction
 import hk.edu.polyu.af.bc.template.flows.Initiator
 import net.corda.core.node.services.Vault.StateStatus
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FlowTests {
     private lateinit var network: MockNetwork
     private lateinit var a: StartedMockNode
     private lateinit var b: StartedMockNode
 
-    @Before
+    @BeforeAll
     fun setup() {
         network = MockNetwork(MockNetworkParameters(cordappsForAllNodes = listOf(
                 TestCordapp.findCordapp("hk.edu.polyu.af.bc.template.contracts"),
@@ -28,12 +29,12 @@ class FlowTests {
         network.runNetwork()
     }
 
-    @After
+    @AfterAll
     fun tearDown() {
         network.stopNodes()
     }
     @Test
-    fun `DummyTest`() {
+    fun dummyTest() {
         val flow = Initiator(b.info.legalIdentities[0])
         val future: Future<SignedTransaction> = a.startFlow(flow)
         network.runNetwork()
