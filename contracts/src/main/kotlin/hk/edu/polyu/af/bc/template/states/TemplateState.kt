@@ -7,8 +7,9 @@ import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 
 @BelongsToContract(TemplateContract::class)
-data class TemplateState(val msg: String,
-                         val sender: Party,
-                         val receiver: Party,
-                         override val participants: List<AbstractParty> = listOf(sender,receiver)
+data class TemplateState(
+    val msg: String,
+    val sender: Party,
+    val receiver: Party,
+    override val participants: List<AbstractParty> = listOf(sender, receiver)
 ) : ContractState

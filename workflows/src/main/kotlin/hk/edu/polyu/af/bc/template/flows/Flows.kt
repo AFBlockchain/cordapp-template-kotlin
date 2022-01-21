@@ -1,28 +1,24 @@
 package hk.edu.polyu.af.bc.template.flows
 
 import co.paralleluniverse.fibers.Suspendable
-import net.corda.core.flows.*
-import net.corda.core.utilities.ProgressTracker
-import net.corda.core.flows.FinalityFlow
-
-import net.corda.core.flows.CollectSignaturesFlow
-
-import net.corda.core.transactions.SignedTransaction
-
-import java.util.stream.Collectors
-
-import net.corda.core.flows.FlowSession
-
-import net.corda.core.identity.Party
-
 import hk.edu.polyu.af.bc.template.contracts.TemplateContract
-
-import net.corda.core.transactions.TransactionBuilder
-
 import hk.edu.polyu.af.bc.template.states.TemplateState
 import net.corda.core.contracts.requireThat
+import net.corda.core.flows.CollectSignaturesFlow
+import net.corda.core.flows.FinalityFlow
+import net.corda.core.flows.FlowLogic
+import net.corda.core.flows.FlowSession
+import net.corda.core.flows.InitiatedBy
+import net.corda.core.flows.InitiatingFlow
+import net.corda.core.flows.ReceiveFinalityFlow
+import net.corda.core.flows.SignTransactionFlow
+import net.corda.core.flows.StartableByRPC
 import net.corda.core.identity.AbstractParty
-
+import net.corda.core.identity.Party
+import net.corda.core.transactions.SignedTransaction
+import net.corda.core.transactions.TransactionBuilder
+import net.corda.core.utilities.ProgressTracker
+import java.util.stream.Collectors
 
 // *********
 // * Flows *
@@ -34,7 +30,7 @@ class Initiator(private val receiver: Party) : FlowLogic<SignedTransaction>() {
 
     @Suspendable
     override fun call(): SignedTransaction {
-        //Hello World message
+        // Hello World message
         val msg = "Hello-World"
         val sender = ourIdentity
 
@@ -42,18 +38,17 @@ class Initiator(private val receiver: Party) : FlowLogic<SignedTransaction>() {
         // Note: ongoing work to support multiple notary identities is still in progress.
         val notary = serviceHub.networkMapCache.notaryIdentities[0]
 
-        //Compose the State that carries the Hello World message
+        // Compose the State that carries the Hello World message
         val output = TemplateState(msg, sender, receiver)
 
         // Step 3. Create a new TransactionBuilder object.
         val builder = TransactionBuilder(notary)
-                .addCommand(TemplateContract.Commands.Create(), listOf(sender.owningKey, receiver.owningKey))
-                .addOutputState(output)
+            .addCommand(TemplateContract.Commands.Create(), listOf(sender.owningKey, receiver.owningKey))
+            .addOutputState(output)
 
         // Step 4. Verify and sign it with our KeyPair.
         builder.verify(serviceHub)
         val ptx = serviceHub.signInitialTransaction(builder)
-
 
         // Step 6. Collect the other party's signature using the SignTransactionFlow.
         val otherParties: MutableList<Party> = output.participants.stream().map { el: AbstractParty? -> el as Party? }.collect(Collectors.toList())
@@ -73,11 +68,10 @@ class Responder(val counterpartySession: FlowSession) : FlowLogic<SignedTransact
     override fun call(): SignedTransaction {
         val signTransactionFlow = object : SignTransactionFlow(counterpartySession) {
             override fun checkTransaction(stx: SignedTransaction) = requireThat {
-               //Addition checks
+                // Additional checks
             }
         }
         val txId = subFlow(signTransactionFlow).id
         return subFlow(ReceiveFinalityFlow(counterpartySession, expectedTxId = txId))
     }
 }
-
